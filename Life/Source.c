@@ -16,9 +16,12 @@ typedef struct
 	uint8_t* data;
 	int file_size;
 	int header_size;
+	int width;
+	int height;
 } Image;
 
-Image loadBMP(FILE* f, int* _w, int* _h)
+
+Image loadBMP(FILE* f)
 {
 	Image res;
 	uint8_t* head = malloc(HeaderSize * sizeof(uint8_t));
@@ -69,7 +72,8 @@ Image loadBMP(FILE* f, int* _w, int* _h)
 		}
 	}
 
-	*_w = w; *_h = h;
+	res.width = w;
+	res.height = h;
 	res.header = head;
 	res.image = img;
 	res.data = data;
@@ -79,7 +83,9 @@ Image loadBMP(FILE* f, int* _w, int* _h)
 
 void freeBMP(Image* image)
 {
-	// TODO
+	free(image->header);
+	free(image->image);
+	free(image->data);
 }
 
 void matrixToData(int n, int m, uint8_t** matrix, uint8_t* data)
@@ -204,20 +210,19 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	int w, h;
-	Image bmp_struct = loadBMP(input_file, &w, &h);
+	Image bmp_struct = loadBMP(input_file);
 
-	int n = h;
-	int m = w;
+	int n = bmp_struct.height;
+	int m = bmp_struct.width;
 	uint8_t** matrix;
 
 	matrix = (uint8_t**)malloc((n + 2) * sizeof(uint8_t*));
 	for (int i = 0; i < n + 2; i++)
 		matrix[i] = (uint8_t*)malloc((m + 2) * sizeof(uint8_t));
 
-	for (int i = 0; i < h; i++)
-		for (int j = 0; j < w; j++)
-			if (bmp_struct.image[i * w + j])
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			if (bmp_struct.image[i * m + j])
 				matrix[i + 1][j + 1] = '0';
 			else
 				matrix[i + 1][j + 1] = '1';
@@ -277,5 +282,6 @@ int main(int argc, char* argv[]) {
 	for (size_t i = 0; i < n + 2; i++)
 		free(matrix[i]);
 	free(matrix);
+	freeBMP(&bmp_struct);
 	return 0;
 }

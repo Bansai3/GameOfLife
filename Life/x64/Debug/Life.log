@@ -1,4 +1,4 @@
 ﻿  Source.c
-C:\Users\Вадим\source\repos\Prog_lab_5\Life\Source.c(230,34): warning C4267: инициализация: преобразование из "size_t" в "uint32_t"; возможна потеря данных
-C:\Users\Вадим\source\repos\Prog_lab_5\Life\Source.c(231,27): warning C4267: инициализация: преобразование из "size_t" в "uint32_t"; возможна потеря данных
+C:\Users\Вадим\source\repos\Prog_lab_5\Life\Source.c(234,34): warning C4267: инициализация: преобразование из "size_t" в "uint32_t"; возможна потеря данных
+C:\Users\Вадим\source\repos\Prog_lab_5\Life\Source.c(235,27): warning C4267: инициализация: преобразование из "size_t" в "uint32_t"; возможна потеря данных
   Life.vcxproj -> C:\Users\Вадим\source\repos\Prog_lab_5\x64\Debug\Life.exe
