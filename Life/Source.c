@@ -18,7 +18,6 @@ typedef struct
 	int header_size;
 } Image;
 
-// TODO: Remove w, h
 Image loadBMP(FILE* f, int* _w, int* _h)
 {
 	Image res;
@@ -278,6 +277,5 @@ int main(int argc, char* argv[]) {
 	for (size_t i = 0; i < n + 2; i++)
 		free(matrix[i]);
 	free(matrix);
-	// TODO: EMPTY MEMORY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	return 0;
 }
